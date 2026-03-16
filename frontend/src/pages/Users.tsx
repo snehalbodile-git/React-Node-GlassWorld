@@ -1,5 +1,5 @@
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import {getUsers,User} from "../services/userService";
 
 function Users(){
@@ -10,7 +10,6 @@ function Users(){
       const feachUser = async ()=>{
         const apiUserData = await getUsers();
         setUsers(apiUserData.data);
-        console.table(apiUserData.data);
       }
       feachUser();
   },[]);
@@ -18,13 +17,6 @@ function Users(){
 
     <div>
       <h2>Users</h2>
-
-      {/* <ul>
-      {users.map((u:any,i:number)=>(
-        <li key={i}>{u.firstName}</li>
-      ))}
-      </ul> */}
-      
         <table className="table table-bordered">
 
         <thead>
