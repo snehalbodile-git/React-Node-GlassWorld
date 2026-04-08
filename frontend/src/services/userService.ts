@@ -8,7 +8,7 @@ export interface User {
   lastName: string
   email: string
   phone: string
-  altPhone: string
+  address: string
   status: string
   createdAt: string
   updatedAt: string
@@ -22,3 +22,12 @@ export const getUsers = async ():Promise<UsersList> => {
   const response = await api.get<UsersList>("/users");
   return response.data;
 };
+
+export const createUser = async(data:any)=>{
+  console.log("Calling API",data);
+  const response = await api.post(
+    "/user",
+    data
+  );
+  return response.data;
+}
