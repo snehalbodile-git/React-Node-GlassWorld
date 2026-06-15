@@ -8,3 +8,5 @@ use Mongo DB
     show dbs
     use glass-world
     show collections
+
+db.collectionName.find();

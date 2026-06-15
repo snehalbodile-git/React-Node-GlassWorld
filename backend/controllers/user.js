@@ -64,17 +64,25 @@ async function handleCreateNewUser(req, res) {
       msg: "Email already exists",
     });
   }
-  const result = await User.create({
-    firstName: body.firstName,
-    lastName: body.lastName,
-    email: body.email,
-    phone: body.phone,
-    address: body.address,
-    role: body.role,
-    status: body.status,
-  });
 
-  return res.status(201).json({ msg: "Success", id: result._id });
+  try {
+    const result = await User.create({
+      firstName: body.firstName,
+      lastName: body.lastName,
+      email: body.email,
+      phone: body.phone,
+      address: body.address,
+      role: body.role,
+      status: body.status,
+    });
+
+    return res.status(201).json({ msg: "Success", id: result._id });
+  } catch (error) {
+    return res.status(500).json({
+      msg: "Failed to create user",
+      error: error.message,
+    });
+  }
 }
 
 module.exports = {

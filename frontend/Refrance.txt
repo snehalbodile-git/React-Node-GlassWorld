@@ -1,0 +1,41 @@
+
+Users: 
+     Role:- Admin,Customer,Vendor
+     FName,LName,email,phone No, Alt Number,Created at, updated at,status
+
+     {
+        "_id": "6612af1e12ab1c0012345678",
+        "role": "Admin",
+        "firstName": "Snehal",
+        "lastName": "Bodile",
+        "email": "snehal@email.com",
+        "phone": "9876543210",
+        "altPhone": "9123456780",
+        "status": "active",
+        "createdAt": "2026-03-14T10:00:00Z",
+        "updatedAt": "2026-03-14T10:00:00Z"
+     }
+
+
+
+
+
+
+Need to learn:
+
+
+
+     Frontend
+React
+
+Backend
+Node.js
+
+AI
+LangChain.js
+
+Vector DB
+Pinecone / Chroma
+
+LLM
+OpenAI

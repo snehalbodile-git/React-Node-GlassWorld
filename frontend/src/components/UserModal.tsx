@@ -1,6 +1,12 @@
+import { User } from "../services/userService";
 import UserForm from "./UserForm";
 
-const UserModal = ({ onClose }: { onClose: () => void }) => {
+export type UserModalProps = {
+  closeUserModal: () => void;
+  refreshUsers: () => void;
+  selectedUser: User | null
+};
+const UserModal = ({ closeUserModal, refreshUsers,selectedUser }: UserModalProps) => {
   return (
     <>
       <div className="modal fade show d-block">
@@ -8,15 +14,22 @@ const UserModal = ({ onClose }: { onClose: () => void }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">
-                {/* {selectedUser.id ? "Update User" : "Add User"} */}
-                Add User
+                {selectedUser?._id ? "Update User" : "Add User"}
               </h5>
 
-              <button type="button" className="btn-close" onClick={onClose}></button>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={closeUserModal}
+              ></button>
             </div>
 
             <div className="modal-body">
-              <UserForm></UserForm>
+              <UserForm
+                closeUserModal={closeUserModal}
+                refreshUsers={refreshUsers}
+                selectedUser = {selectedUser}
+              ></UserForm>
             </div>
           </div>
         </div>

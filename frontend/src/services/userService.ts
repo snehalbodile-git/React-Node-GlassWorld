@@ -2,7 +2,7 @@ import api from "./api";
 
 
 export interface User {
-  id: number
+  _id: string
   role: string
   firstName: string
   lastName: string
@@ -24,10 +24,24 @@ export const getUsers = async ():Promise<UsersList> => {
 };
 
 export const createUser = async(data:any)=>{
-  console.log("Calling API",data);
   const response = await api.post(
-    "/user",
+    "/users",
     data
+  );
+  return response.data;
+}
+
+export const updateUser = async({id,data}:any)=>{
+ const response = await api.patch(
+    `/users/${id}`,
+    data
+  );
+  return response.data;
+}
+
+export const deleteUser = async(id:string)=>{
+  const response = await api.delete(
+    `/users/${id}`
   );
   return response.data;
 }
