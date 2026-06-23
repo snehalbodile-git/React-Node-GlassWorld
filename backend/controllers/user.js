@@ -1,8 +1,9 @@
 const { json } = require("body-parser");
 const User = require("../models/user");
+const bcrypt = require("bcryptjs");
 
 async function handleGetAllUsers(req, res) {
-  const allUsers = await User.find({});
+  const allUsers = await User.find({}).select("-password");
   return res.json({
     success: true,
     data: allUsers,
@@ -10,7 +11,7 @@ async function handleGetAllUsers(req, res) {
 }
 
 async function handleGetUserById(req, res) {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id).select("-password");
   if (!user) return res.status(404).json({ erro: "User not found" });
   return res.json({
     success: true,
@@ -65,11 +66,13 @@ async function handleCreateNewUser(req, res) {
     });
   }
 
+  const hashedPassword = await bcrypt.hash("Admin@123", 10); // for temp password we need to take it from user in future
   try {
     const result = await User.create({
       firstName: body.firstName,
       lastName: body.lastName,
       email: body.email,
+      password: hashedPassword,
       phone: body.phone,
       address: body.address,
       role: body.role,
@@ -85,10 +88,31 @@ async function handleCreateNewUser(req, res) {
   }
 }
 
+async function handleLogin(req, res) {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email: email });
+  if (!user) {
+    return res.status(401).json({ message: "Invalid Email Id" });
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  // remove password before sending
+  const userResponse = user.toObject ? user.toObject() : user;
+  delete userResponse.password;
+ return res.json({
+    success: true,
+    data: userResponse,
+  });
+}
+
 module.exports = {
   handleGetAllUsers,
   handleGetUserById,
   handleUpdateUserById,
   handleDeleteUserById,
   handleCreateNewUser,
+  handleLogin,
 };

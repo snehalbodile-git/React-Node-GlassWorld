@@ -6,9 +6,11 @@ const {
   handleUpdateUserById,
   handleDeleteUserById,
   handleCreateNewUser,
+  handleLogin
 } = require("../controllers/user");
 
 router.get("/", handleGetAllUsers);
+router.post("/login", handleLogin);
 
 router
 .route("/:id")

@@ -1,4 +1,6 @@
 
+npm run dev
+
 Users: 
      Role:- Admin,Customer,Vendor
      FName,LName,email,phone No, Alt Number,Created at, updated at,status

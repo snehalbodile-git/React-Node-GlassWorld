@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       match: [/^\S+@\S+\.\S+$/, "Please use a valid email"],
     },
+    password: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
       required: true,
@@ -31,7 +35,7 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       required: true,
-      enum: ["admin", "vendor", "customer","user"], // customize as needed
+      enum: ["admin", "vendor", "customer", "user"], // customize as needed
     },
     status: {
       type: String,
@@ -42,7 +46,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // adds createdAt & updatedAt
-  }
+  },
 );
 
 const user = mongoose.model("Users", userSchema);
