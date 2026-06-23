@@ -1,0 +1,12 @@
+Proeject start
+    npm start
+mongodb start
+    brew services start mongodb/brew/mongodb-community@8.0
+use Mongo DB
+    mongosh
+
+    show dbs
+    use glass-world
+    show collections
+
+db.collectionName.find();

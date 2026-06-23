@@ -1,25 +1,29 @@
+const express = require("express");
+const cors = require("cors");
+const { connectMongoDb } = require("./connection");
+const routes = require("./routes/user");
 
-const express = require("express")
-const cors = require("cors")
+const app = express();
 
-const app = express()
+connectMongoDb();
 
-app.use(cors())
+app.use(express.json());
 
-app.get("/",(req,res)=>{
-    res.send("API Running")
-})
+const corsOptions = {
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.get("/users",(req,res)=>{
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
-    res.json([
-        {id:1,name:"Snehal"},
-        {id:2,name:"Megha"},
-        {id:3,name:"Admin User"}
-    ])
+app.use("/api/users", routes);
 
-})
+app.get("/", (req, res) => {
+  res.send("API Running");
+});
 
-app.listen(5000,()=>{
-    console.log("Server running on port 5000")
-})
+app.listen(5002, () => {
+  console.log("Server running on port 5002");
+});
