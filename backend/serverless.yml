@@ -1,0 +1,20 @@
+service: react-node-admin-api
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: ap-south-1
+
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+
+functions:
+  app:
+    handler: lambda.handler
+    events:
+      - httpApi:
+          path: /
+          method: ANY
+      - httpApi:
+          path: /{proxy+}
+          method: ANY

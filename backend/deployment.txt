@@ -1,0 +1,34 @@
+Phase 1: Create MongoDB Atlas
+    -create account: http://mongodb.com/products/platform/atlas-database?utm_source=chatgpt.com
+    -Create a Free M0 Cluster
+    - Install your driver - npm install mongodb
+    -Add your connection string into your application code 
+        mongodb+srv://<db_username>:XBBebpZJuN8AlwaG@glass-world.1htq6wk.mongodb.net/?appName=glass-world
+
+Phase 2: Create lambada by using Serverless Framework
+    - Install Serverless Framework
+       - serverless --version
+       - verify (npx sls --version)
+   - Inside your backend folder
+       - npm install serverless-http
+       - Create lambda.js (In your backend root (same level as server.js))
+       - Create serverless.yml
+       - Create account on https://app.serverless.com/snehalbodile/services
+       - AWS configuration credentials (aws configure;)
+       - npx serverless deploy;
+
+Pase3 : 
+
+endpoints:
+  ANY - https://j9p82b5yt1.execute-api.ap-south-1.amazonaws.com/
+  ANY - https://j9p82b5yt1.execute-api.ap-south-1.amazonaws.com/{proxy+}
+functions:
+  app: react-node-admin-api-dev-app (4.3 MB)
+
+
+For check log 
+    npx serverless logs -f app --tail
+
+DB credentials
+ Username: contactsnehalbodile_db_user
+ Pass: XBBebpZJuN8AlwaG
