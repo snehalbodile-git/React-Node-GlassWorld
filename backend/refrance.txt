@@ -10,3 +10,13 @@ use Mongo DB
     show collections
 
 db.collectionName.find();
+
+JWT token 
+    npm install jsonwebtoken dotenv
+    .env
+    JWT_SECRET=replace_with_a_strong_secret
+    JWT_EXPIRES_IN=1d
+    PORT=5002
+
+For .env 
+    npm install dotenv
